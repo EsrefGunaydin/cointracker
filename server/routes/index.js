@@ -10,4 +10,7 @@ module.exports = app => {
     app.patch('/api/coin/:id', controller.updateCoin);
     // D
     app.delete('/api/coin/:id/', controller.deleteCoin);
+
+    //Get Coin Price
+    app.get('/api/coinprice', controller.findCoinPrice)
 }

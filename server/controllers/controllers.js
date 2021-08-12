@@ -1,5 +1,7 @@
-
 const { Coin } = require('../models/coin.model');
+const axios = require('axios'); 
+const specialURL = 'prices'
+const apiKEY = '951a9767e03f76162b39becc0393f7ba'
 
 module.exports = {
     // C
@@ -27,8 +29,15 @@ module.exports = {
     },
     // D
     deleteCoin: (req,res) => {
-        Author.deleteOne({ _id: req.params.id })
+        Coin.deleteOne({ _id: req.params.id })
             .then(data => res.json({ message: "success", data: data }))
             .catch(err => res.json({ message: "error", data: err }));
+    },
+
+    //post coin price
+    findCoinPrice: async (req, res) => {
+        await axios.get(`https://api.nomics.com/v1/${specialURL}?key=${apiKEY}`)
+        .then(data => res.json({ message: "success", data: data.data }))
+        .catch(err=>console.log(err))
     }
 }

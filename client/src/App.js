@@ -2,7 +2,7 @@ import './App.css';
 import MainTable from './components/MainTable';
 import MainForm from './components/MainForm';
 import axios from 'axios';
-import { useState} from 'react';
+import { useState} from 'react';  
 
 function App() {
 
@@ -14,22 +14,29 @@ function App() {
       unitPrice:"",
   })
 
+  const {title, type, date, amount, unitPrice } = coin;
+
   const submitHandler = (e) => {
       e.preventDefault();
-      axios.post('http://localhost:5000/api/coin/', coin)
+      axios.post('http://localhost:5000/api/coins/', coin)
           .then(res => console.log(res))
           .catch(err => console.log(err))
+          
+          setCoin({
+            title: "",
+            type: "",
+            date: "",
+            amount:"",
+            unitPrice:"",
+        })
   }
 
   const changeHandler = e => {
-
       setCoin({
           ...coin, 
           [e.target.name ] : e.target.value
       })
   }
-
-  const {title, type, date, amount, unitPrice } = coin;
 
   return (
     <div className="App">
